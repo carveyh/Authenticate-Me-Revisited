@@ -5,8 +5,10 @@ import { BrowserRouter } from 'react-router-dom';
 import './index.css';
 import App from './App';
 import configureStore from './store';
-import csrfFetch, { restoreCSRF } from './store/csrf';
+import csrfFetch from './store/csrf';
+// import { restoreCSRF } from './store/csrf';
 import * as sessionActions from './store/session';
+import { restoreSession } from './store/session';
 import { useEffect } from 'react';
 
 const store = configureStore();
@@ -43,7 +45,9 @@ const renderApplication = () => {
 }
 
 if (sessionStorage.getItem("X-CSRF-Token") === null){
-  restoreCSRF().then(renderApplication);
+  // restoreCSRF().then(renderApplication);
+  // restoreSession().then(renderApplication); // This won't work since restoreSession() is now a thunk action creator, so need to dispatch it like you normally would
+  store.dispatch(restoreSession()).then(renderApplication);
 } else {
   renderApplication();
 }

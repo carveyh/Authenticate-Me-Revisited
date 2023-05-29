@@ -6,7 +6,7 @@ function App() {
   return (
     <div>
       <h1>Hello from App</h1>
-      <NavLink exact to="/">Home</NavLink>
+      <NavLink exact activeStyle={{ backgroundColor:"blue" }} to="/">Home</NavLink>
       <br/>
       <NavLink exact activeStyle={{ backgroundColor:"gray" }} to="/login">Login</NavLink>
 

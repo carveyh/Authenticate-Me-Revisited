@@ -44,6 +44,7 @@ export const loginUser = (user) => async dispatch => {
 		const data = await res.json();
 
 		// RETAIN SESSION USER INFO ACROSS REFRESHES!!!
+		// debugger
 		storeCurrentUser(data.user)
 		dispatch(setSession(data.user))
 	}
@@ -53,20 +54,23 @@ export const loginUser = (user) => async dispatch => {
 export const restoreSession = () => async dispatch => {
 	// First we make a DB call to check if anyone logged in on backend side.
 	const res = await csrfFetch('/api/session');
-	// We storeSCRFToken regardless of whether someone logged in on the back
+	// We storeSCRFToken regardless of whether someone logged in on the back.
+	// Has the same effect as restoreCSRF from src/store/csrf.js
 	storeCSRFToken(res);
 	// Parse the API response body into POJO from JSON
 	const data = await res.json();
+	// debugger
 	storeCurrentUser(data.user);
 	// Here is the magic where we restore the current user to app's session slice of state.
 	dispatch(setSession(data.user));
+	// return res;
 }
 
 // RETAIN SESSION USER INFO ACROSS REFRESHES!!!
 const storeCurrentUser = (user) => {
 	// check null first
 	if(user){ 
-		const stringifiedUser = JSON.stringify(user.user);
+		const stringifiedUser = JSON.stringify(user);
 		sessionStorage.setItem("currentUser", stringifiedUser);
 
 	} else {

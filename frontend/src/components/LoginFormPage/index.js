@@ -57,8 +57,8 @@ const LoginFormPage = () => {
 	}
 	
 	
-	if(sessionUser) return <Redirect to="/"/>
 	// debugger
+	if(sessionUser) return <Redirect to="/"/>
 	return (
 		<div className="login-form">
 			<form onSubmit={handleSubmit}>
