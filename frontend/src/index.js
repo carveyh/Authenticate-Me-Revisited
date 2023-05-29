@@ -7,8 +7,15 @@ import App from './App';
 import configureStore from './store';
 import csrfFetch, { restoreCSRF } from './store/csrf';
 import * as sessionActions from './store/session';
+import { useEffect } from 'react';
 
 const store = configureStore();
+
+// let store;
+
+// useEffect(() => {
+//   store = configureStore();
+// }, [])
 
 if(process.env.NODE_ENV !== 'production') {
   window.store = store;

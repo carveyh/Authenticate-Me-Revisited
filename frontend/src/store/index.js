@@ -17,6 +17,9 @@ if(process.env.NODE_ENV === 'production') {
 }
 
 const configureStore = (preloadedState = {}) => {
+	// Note: when a store is created by invoking below, Redux dispatches a dummy action
+	// to reduceer to populate store with initial state, no need to handle dummy action directly.
+	// Source: https://redux.js.org/api/createstore
 	return createStore(rootReducer, preloadedState, enhancer);
 }
 
