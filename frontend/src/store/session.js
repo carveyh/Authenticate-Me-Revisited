@@ -1,6 +1,6 @@
 // Session slice of state sample if current user:
 	// {
-	//   user: {
+	//   user: { // This is also the data format returned by backend show.json, with top-level key of user
 	//     id,
 	//     email,
 	//     username,
@@ -10,10 +10,10 @@
 	// }
 // Session slice of state sample if NO current user:
 	// {
-	// 	user: null
+	// 		user: null
 	// }
 
-import csrfFetch from "./csrf"
+import csrfFetch, {storeCSRFToken} from "./csrf"
 
 // Action type constants
 export const SET_CURRENT_USER = "session/setCurrentUser"
@@ -42,9 +42,36 @@ export const loginUser = (user) => async dispatch => {
 		// Currently, backend app/views/api/users/show.json.jbuilder returns a { user: { id, email, username, etc } }
 		// Need to grab the actual user from within the `user` key of the returned response body, we call `data`
 		const user = await res.json();
+
+		// RETAIN SESSION USER INFO ACROSS REFRESHES!!!
+		storeCurrentUser(user)
 		dispatch(setSession(user))
 	}
 	return res;
+}
+
+export const restoreSession = () => async dispatch => {
+	// First we make a DB call to check if anyone logged in on backend side.
+	const res = await csrfFetch('/api/session');
+	// We storeSCRFToken regardless of whether someone logged in on the back
+	storeCSRFToken(res);
+	// Parse the API response body into POJO from JSON
+	const user = await res.json();
+	storeCurrentUser(user);
+	// Here is the magic where we restore the current user to app's session slice of state.
+	dispatch(setSession(user));
+}
+
+// RETAIN SESSION USER INFO ACROSS REFRESHES!!!
+const storeCurrentUser = (user) => {
+	// check null first
+	if(user.user){ 
+		const stringifiedUser = JSON.stringify(user.user);
+		sessionStorage.setItem("currentUser", stringifiedUser);
+
+	} else {
+		sessionStorage.removeItem("currentUser");
+	}
 }
 
 // Session Reducer
