@@ -13,7 +13,8 @@
 	// 		user: null
 	// }
 
-import csrfFetch, {storeCSRFToken} from "./csrf"
+// import csrfFetch, {storeCSRFToken} from "./csrf"
+import csrfFetch from "./csrf"
 
 // Action type constants
 export const SET_CURRENT_USER = "session/setCurrentUser"
@@ -63,6 +64,7 @@ export const restoreSession = () => async dispatch => {
 	storeCurrentUser(data.user);
 	// Here is the magic where we restore the current user to app's session slice of state.
 	dispatch(setSession(data.user));
+	console.log("Session restored")
 	// return res;
 }
 
@@ -78,8 +80,17 @@ const storeCurrentUser = (user) => {
 	}
 }
 
+export const storeCSRFToken = (response) => {
+	const csrfToken = response.headers.get("X-CSRF-Token");
+	// `if` required: if csrfToken is null, sessionStorage.setItem will coerce that into string "null", whose truthiness is `true`.
+	// Btw: to set a key in sessionStorage to `null`, do `sessionStorage.removeItem("headerName")`
+	if(csrfToken) sessionStorage.setItem("X-CSRF-Token", csrfToken);
+}
+
 // Session Reducer
-const sessionReducer = (state = { user: null }, action) => {
+const currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
+const sessionReducer = (state = { user: currentUser }, action) => {
+// const sessionReducer = (state = { user: null }, action) => { //We need to change so default state points to currentUser from sessionStorage
 	Object.freeze(state)
 	const nextState = {...state}
 	switch (action.type) {

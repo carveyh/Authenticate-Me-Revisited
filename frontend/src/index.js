@@ -8,7 +8,6 @@ import configureStore from './store';
 import csrfFetch from './store/csrf';
 // import { restoreCSRF } from './store/csrf';
 import * as sessionActions from './store/session';
-import { restoreSession } from './store/session';
 import { useEffect } from 'react';
 
 const store = configureStore();
@@ -44,10 +43,10 @@ const renderApplication = () => {
   );
 }
 
-if (sessionStorage.getItem("X-CSRF-Token") === null){
+if (sessionStorage.getItem("X-CSRF-Token") === null || sessionStorage.getItem("currrentUser") === null){
   // restoreCSRF().then(renderApplication);
   // restoreSession().then(renderApplication); // This won't work since restoreSession() is now a thunk action creator, so need to dispatch it like you normally would
-  store.dispatch(restoreSession()).then(renderApplication);
+  store.dispatch(sessionActions.restoreSession()).then(renderApplication);
 } else {
   renderApplication();
 }

@@ -10,17 +10,11 @@ const csrfFetch = async (url, options = {}) => {
 	return res;
 }
 
-export const restoreCSRF = async () => {
-	const response = await csrfFetch('/api/session');
-	storeCSRFToken(response);
-	return response;
-}
+// export const restoreCSRF = async () => {
+// 	const response = await csrfFetch('/api/session');
+// 	storeCSRFToken(response);
+// 	return response;
+// }
 
-export const storeCSRFToken = (response) => {
-	const csrfToken = response.headers.get("X-CSRF-Token");
-	// `if` required: if csrfToken is null, sessionStorage.setItem will coerce that into string "null", whose truthiness is `true`.
-	// Btw: to set a key in sessionStorage to `null`, do `sessionStorage.removeItem("headerName")`
-	if(csrfToken) sessionStorage.setItem("X-CSRF-Token", csrfToken);
-}
 
 export default csrfFetch;
