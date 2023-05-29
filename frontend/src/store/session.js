@@ -41,11 +41,11 @@ export const loginUser = (user) => async dispatch => {
 	if(res.ok){
 		// Currently, backend app/views/api/users/show.json.jbuilder returns a { user: { id, email, username, etc } }
 		// Need to grab the actual user from within the `user` key of the returned response body, we call `data`
-		const user = await res.json();
+		const data = await res.json();
 
 		// RETAIN SESSION USER INFO ACROSS REFRESHES!!!
-		storeCurrentUser(user)
-		dispatch(setSession(user))
+		storeCurrentUser(data.user)
+		dispatch(setSession(data.user))
 	}
 	return res;
 }
@@ -56,16 +56,16 @@ export const restoreSession = () => async dispatch => {
 	// We storeSCRFToken regardless of whether someone logged in on the back
 	storeCSRFToken(res);
 	// Parse the API response body into POJO from JSON
-	const user = await res.json();
-	storeCurrentUser(user);
+	const data = await res.json();
+	storeCurrentUser(data.user);
 	// Here is the magic where we restore the current user to app's session slice of state.
-	dispatch(setSession(user));
+	dispatch(setSession(data.user));
 }
 
 // RETAIN SESSION USER INFO ACROSS REFRESHES!!!
 const storeCurrentUser = (user) => {
 	// check null first
-	if(user.user){ 
+	if(user){ 
 		const stringifiedUser = JSON.stringify(user.user);
 		sessionStorage.setItem("currentUser", stringifiedUser);
 
@@ -82,7 +82,7 @@ const sessionReducer = (state = { user: null }, action) => {
 		case SET_CURRENT_USER:
 			// nextState["user"] = action.user;
 			// return nextState;
-			return {...nextState, ...action.user};
+			return {...nextState, user: action.user};
 		case REMOVE_CURRENT_USER:
 			return {...nextState, user: null };
 		default:
