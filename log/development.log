@@ -1369,3 +1369,63 @@ NameError - undefined local variable or method `banana' for #<Api::SessionsContr
 Completed 500 Internal Server Error in 10ms (Views: 0.6ms | ActiveRecord: 0.0ms | Allocations: 4263)
 
 
+Started GET "/api/session" for 127.0.0.1 at 2023-05-28 21:03:26 -0400
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Api::SessionsController#show as JSON
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:32:in `current_user'
+  Rendering api/users/show.json.jbuilder
+  Rendered api/users/show.json.jbuilder (Duration: 1.4ms | Allocations: 693)
+Completed 200 OK in 1020ms (Views: 1002.0ms | ActiveRecord: 5.1ms | Allocations: 959602)
+
+
+Started GET "/api/session" for 127.0.0.1 at 2023-05-28 21:04:57 -0400
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Api::SessionsController#show as JSON
+  [1m[36mUser Load (1.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:32:in `current_user'
+  Rendering api/users/show.json.jbuilder
+  Rendered api/users/show.json.jbuilder (Duration: 1.4ms | Allocations: 694)
+Completed 200 OK in 1032ms (Views: 1014.0ms | ActiveRecord: 5.4ms | Allocations: 959579)
+
+
+Started POST "/api/test?login" for 127.0.0.1 at 2023-05-28 21:05:42 -0400
+Processing by ApplicationController#test as */*
+  Parameters: {"login"=>nil}
+Can't verify CSRF token authenticity.
+Completed 422 Unprocessable Entity in 2ms (Views: 1.1ms | ActiveRecord: 0.0ms | Allocations: 774)
+
+
+Started POST "/api/test?login" for 127.0.0.1 at 2023-05-28 21:07:08 -0400
+Processing by ApplicationController#test as */*
+  Parameters: {"login"=>nil, "application"=>{}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" ORDER BY "users"."id" ASC LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:19:in `test'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/models/user.rb:86:in `generate_unique_session_token'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  ↳ app/models/user.rb:76:in `reset_session_token!'
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["username", "Demo-lition"], ["id", 1], ["LIMIT", 1]]
+  ↳ app/models/user.rb:76:in `reset_session_token!'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["email", "demo@user.io"], ["id", 1], ["LIMIT", 1]]
+  ↳ app/models/user.rb:76:in `reset_session_token!'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."session_token" = $1 AND "users"."id" != $2 LIMIT $3[0m  [["session_token", "[FILTERED]"], ["id", 1], ["LIMIT", 1]]
+  ↳ app/models/user.rb:76:in `reset_session_token!'
+  [1m[36mUser Update (0.6ms)[0m  [1m[33mUPDATE "users" SET "session_token" = $1, "updated_at" = $2 WHERE "users"."id" = $3[0m  [["session_token", "[FILTERED]"], ["updated_at", "2023-05-29 01:07:08.251906"], ["id", 1]]
+  ↳ app/models/user.rb:76:in `reset_session_token!'
+  [1m[36mTRANSACTION (0.9ms)[0m  [1m[35mCOMMIT[0m
+  ↳ app/models/user.rb:76:in `reset_session_token!'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:32:in `current_user'
+Completed 200 OK in 13ms (Views: 0.1ms | ActiveRecord: 3.0ms | Allocations: 9054)
+
+
+Started GET "/api/session" for 127.0.0.1 at 2023-05-28 21:08:23 -0400
+Processing by Api::SessionsController#show as JSON
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."session_token" = $1 LIMIT $2[0m  [["session_token", "[FILTERED]"], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:32:in `current_user'
+  Rendering api/users/show.json.jbuilder
+  Rendered api/users/show.json.jbuilder (Duration: 1.0ms | Allocations: 189)
+Completed 200 OK in 6ms (Views: 1.9ms | ActiveRecord: 0.4ms | Allocations: 1891)
+
+

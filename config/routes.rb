@@ -4,8 +4,8 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   # root "articles#index"
 
-  # TEST ROUTE FOR SETUP
-  post 'api/test', to: 'application#test'
+  # # TEST ROUTE FOR SETUP
+  # post 'api/test', to: 'application#test'
 
   # Effects of nesting routes within `namespace :api`:
     # Each route path becomes prefixed with api/
