@@ -36,6 +36,7 @@ export const loginUser = (user) => async dispatch => {
 		method: 'POST',
 		body: JSON.stringify({credential, password})
 	})
+	console.log(res.bodyUsed)
 	// debugger
 	if(res.ok){
 		// Currently, backend app/views/api/users/show.json.jbuilder returns a { user: { id, email, username, etc } }
@@ -43,7 +44,7 @@ export const loginUser = (user) => async dispatch => {
 		const user = await res.json();
 		dispatch(setSession(user))
 	}
-	// return res;
+	return res;
 }
 
 // Session Reducer
