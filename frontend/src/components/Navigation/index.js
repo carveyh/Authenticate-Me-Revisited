@@ -19,6 +19,9 @@ const Navigation = () => {
 
 return (
 		<>
+			<div className="above-nav-banner">
+
+			</div>
 			<div className="nav-bar-container">
 				<ProfileButton />
 				<ul>

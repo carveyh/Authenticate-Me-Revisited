@@ -1,5 +1,5 @@
 .profile-drop-menu {
-	position:fixed;
+	position:absolute;
 	top: 30px;
 	left: 30px;
 	background-color: white;
@@ -9,12 +9,27 @@
 	box-shadow: 2px 5px 15px #999999;
 }
 
+.above-nav-banner {
+	height: 50px;
+	background-color: aquamarine;
+}
+
 .nav-bar-container {
-	/* height: 100px; */
-	/* position: sticky; */
+	height: 60px;
+	position: sticky;
+	/* margin-top:10px; */
+	top:0px;
+	/* top:30px; */
+	background-color: lightpink;
+	z-index: 1000;
 	/* position: relative; */
 	/* position: fixed; */
 }
+
+/* .nav-bar-placeholder {
+	height: 100px;
+	background-color: lightpink;
+} */
 
 .profile-drop-menu:hover {
 	/* horiz offset, vert offset, blur amt, color */
