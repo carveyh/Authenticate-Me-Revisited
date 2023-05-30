@@ -1,0 +1,30 @@
+.profile-drop-menu {
+	position:fixed;
+	top: 30px;
+	left: 30px;
+	background-color: white;
+	border: 1px solid pink;
+	border-radius: 15px;
+	padding: 5px;
+	box-shadow: 2px 5px 15px #999999;
+}
+
+.nav-bar-container {
+	/* height: 100px; */
+	/* position: sticky; */
+	/* position: relative; */
+	/* position: fixed; */
+}
+
+.profile-drop-menu:hover {
+	/* horiz offset, vert offset, blur amt, color */
+	box-shadow: 2px 5px 15px #888888;
+}
+
+.profile-drop-menu > li:hover {
+	color: red;
+}
+
+.nav-link {
+	margin-right: 10px;
+}

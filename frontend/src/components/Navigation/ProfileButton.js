@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { logoutUser } from "../../store/session";
+import { Link } from "react-router-dom";
 
 const ProfileButton = () => {
 	const dispatch = useDispatch();
@@ -31,6 +32,16 @@ const ProfileButton = () => {
 		}
 	}, [showMenu])
 
+	const ProfileDropMenu = () => {
+		return (
+			<ul className="profile-drop-menu">
+				<li>Logged in as: {sessionUser.username}</li>
+				<li>Email: {sessionUser.email}</li>
+				<li><Link onClick={handleLogout}>Logout</Link></li>
+			</ul>
+		)
+	}
+
 	return (
 		<div>
 			<div 
@@ -38,15 +49,20 @@ const ProfileButton = () => {
 				// onClick={e => setShowMenu(oldShowMenu => !oldShowMenu)}
 				onClick={openMenu}
 			>
-				{sessionUser && <i className="fa-solid fa-poo"></i>}
-				{!sessionUser && <i className="fa-solid fa-bars"></i>}
+				{sessionUser && 
+				<>
+					<i className="fa-solid fa-poo"></i>
+					(ProfilePlaceholder)
+				</>}
+				{!sessionUser && 
+				<>
+					<i className="fa-solid fa-bars"></i>
+					(NotLoggedInPlaceholder)
+				</>}
+				
 			</div>
 
-			{(showMenu && sessionUser) && <ul>
-				<li>Logged in as: {sessionUser.username}</li>
-				<li>Email: {sessionUser.email}</li>
-				<li><button type="submit" onClick={handleLogout}>Logout</button></li>
-			</ul>}
+			{(showMenu && sessionUser) && <ProfileDropMenu />}
 
 		</div>
 	)
