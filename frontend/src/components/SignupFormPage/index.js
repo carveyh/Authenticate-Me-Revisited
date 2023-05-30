@@ -12,6 +12,7 @@ const SignupFormPage = () => {
 	const [email, setEmail] = useState('');	
 	const [username, setUsername] = useState('');	
 	const [password, setPassword] = useState('');	
+	const [confirmPassword, setConfirmPassword] = useState('');	
 	const [errors, setErrors] = useState([]);
 
 	const handleEmail = (e) => {
@@ -29,10 +30,17 @@ const SignupFormPage = () => {
 		setPassword(e.target.value);
 	}
 
+	const handleConfirmPassword = (e) => {
+		e.preventDefault();
+		setConfirmPassword(e.target.value);
+	}
+
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		const user = {email, username, password}
-		dispatch(signupUser(user))
+		if(password === confirmPassword){
+			
+			const user = {email, username, password}
+			return dispatch(signupUser(user))
 			.catch(async (res) => {
 				let data;
 				try {
@@ -43,8 +51,11 @@ const SignupFormPage = () => {
 				if(data?.errors) setErrors(data.errors)
 				else if(data) setErrors([data]) //NOT SURE WHAT THIS LINE DOES
 				else setErrors([res.statusText]);
-
+				
 			})
+		} else {
+			return setErrors(['Confirm Password must match Password'])
+		}
 	}
 
 	if(sessionUser) return <Redirect to="/" />
@@ -80,6 +91,16 @@ const SignupFormPage = () => {
 						type="password"
 						value={password}
 						onChange={handlePassword}
+						required
+					/>
+				</label>
+				<br />
+				<br />
+				<label>Confirm Password:&nbsp;
+					<input
+						type="password"
+						value={confirmPassword}
+						onChange={handleConfirmPassword}
 						required
 					/>
 				</label>
