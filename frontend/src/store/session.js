@@ -88,6 +88,7 @@ export const storeCSRFToken = (response) => {
 }
 
 // Session Reducer
+// How session slice of state's :user gets restored to a currentUser from sessionStorage, if any.
 const currentUser = JSON.parse(sessionStorage.getItem("currentUser"));
 const sessionReducer = (state = { user: currentUser }, action) => {
 // const sessionReducer = (state = { user: null }, action) => { //We need to change so default state points to currentUser from sessionStorage

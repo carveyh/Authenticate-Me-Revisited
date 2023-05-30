@@ -43,7 +43,10 @@ const renderApplication = () => {
   );
 }
 
-if (sessionStorage.getItem("X-CSRF-Token") === null || sessionStorage.getItem("currrentUser") === null){
+console.log("X-CSRF-Token", sessionStorage.getItem("X-CSRF-Token")===null)
+console.log("currentUser", sessionStorage.getItem("currentUser")===null)
+
+if (sessionStorage.getItem("X-CSRF-Token") === null || sessionStorage.getItem("currentUser") === null) {
   // restoreCSRF().then(renderApplication);
   // restoreSession().then(renderApplication); // This won't work since restoreSession() is now a thunk action creator, so need to dispatch it like you normally would
   store.dispatch(sessionActions.restoreSession()).then(renderApplication);

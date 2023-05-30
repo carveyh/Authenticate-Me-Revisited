@@ -2,7 +2,7 @@ import LoginFormPage from "./components/LoginFormPage";
 import { Route, Link, NavLink, Switch, useHistory } from "react-router-dom";
 
 function App() {
-  const history = useHistory();
+  // const history = useHistory();
   return (
     <div>
       <h1>Hello from App</h1>
