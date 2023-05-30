@@ -11,9 +11,6 @@ const Navigation = () => {
 				<li>
 					<NavLink exact activeStyle={{ backgroundColor:"blue" }} to="/">Home</NavLink>
 				</li>
-				<li>
-					Welcome, {sessionUser.username}
-				</li>
 			</ul>
 		</div>
 	) 
