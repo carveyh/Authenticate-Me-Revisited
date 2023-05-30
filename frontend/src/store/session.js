@@ -72,6 +72,17 @@ export const signupUser = (user) => async dispatch => {
 
 }
 
+export const logoutUser = () => async dispatch => {
+	const res = await csrfFetch('api/session', {
+		method: 'DELETE'
+	})
+	if(res.ok) {
+		storeCurrentUser(null)
+		dispatch(removeSession())
+	}
+	return res;
+}
+
 export const restoreSession = () => async dispatch => {
 	// First we make a DB call to check if anyone logged in on backend side.
 	const res = await csrfFetch('/api/session');
