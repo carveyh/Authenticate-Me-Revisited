@@ -43,8 +43,8 @@ const renderApplication = () => {
   );
 }
 
-console.log("X-CSRF-Token", sessionStorage.getItem("X-CSRF-Token")===null)
-console.log("currentUser", sessionStorage.getItem("currentUser")===null)
+// console.log("X-CSRF-Token", sessionStorage.getItem("X-CSRF-Token")===null)
+// console.log("currentUser", sessionStorage.getItem("currentUser")===null)
 
 if (sessionStorage.getItem("X-CSRF-Token") === null || sessionStorage.getItem("currentUser") === null) {
   // restoreCSRF().then(renderApplication);

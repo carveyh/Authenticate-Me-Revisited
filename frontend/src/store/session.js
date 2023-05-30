@@ -37,7 +37,7 @@ export const loginUser = (user) => async dispatch => {
 		method: 'POST',
 		body: JSON.stringify({credential, password})
 	})
-	console.log(res.bodyUsed)
+	// console.log(res.bodyUsed)
 	// debugger
 	if(res.ok){
 		// Currently, backend app/views/api/users/show.json.jbuilder returns a { user: { id, email, username, etc } }
@@ -50,6 +50,26 @@ export const loginUser = (user) => async dispatch => {
 		dispatch(setSession(data.user))
 	}
 	return res;
+}
+
+export const signupUser = (user) => async dispatch => {
+	const {email, username, password} = user;
+	const res = await csrfFetch('api/users', {
+		method: 'POST',
+		body: JSON.stringify({email, username, password})
+	})
+	if(res.ok){
+		// Currently, backend app/views/api/users/show.json.jbuilder returns a { user: { id, email, username, etc } }
+		// Need to grab the actual user from within the `user` key of the returned response body, we call `data`
+		const data = await res.json();
+
+		// RETAIN SESSION USER INFO ACROSS REFRESHES!!!
+		// debugger
+		storeCurrentUser(data.user)
+		dispatch(setSession(data.user))
+	}
+	return res;
+
 }
 
 export const restoreSession = () => async dispatch => {
