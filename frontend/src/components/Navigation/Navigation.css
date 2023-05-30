@@ -15,6 +15,7 @@
 }
 
 .nav-bar-container {
+	/* If below height is specified, how prevent resized browser does not cause elements to break out of container */
 	height: 60px;
 	position: sticky;
 	/* margin-top:10px; */
