@@ -6,7 +6,7 @@ import { loginUser } from "../../store/session";
 import { Redirect } from "react-router-dom";
 // import { useEffect } from "react";
 
-const LoginFormPage = () => {
+const LoginForm = () => {
 	const sessionUser = useSelector((state = {}) => state.session?.user )
 	
 	const dispatch = useDispatch();
@@ -58,7 +58,7 @@ const LoginFormPage = () => {
 	
 	
 	// debugger
-	if(sessionUser) return <Redirect to="/"/>
+	// if(sessionUser) return <Redirect to="/"/>
 	return (
 		<div className="login-form">
 			<form onSubmit={handleSubmit}>
@@ -91,4 +91,4 @@ const LoginFormPage = () => {
 	)
 }
 
-export default LoginFormPage;
+export default LoginForm;

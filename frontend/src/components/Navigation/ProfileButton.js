@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { logoutUser } from "../../store/session";
 import { Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 const ProfileButton = () => {
 	const dispatch = useDispatch();
@@ -14,6 +15,7 @@ const ProfileButton = () => {
 		e.preventDefault();
 		dispatch(logoutUser());
 		setShowMenu(false); //Do I need this?
+		return <Redirect to="/" />
 	}
 
 	const openMenu = (e) => {

@@ -1,4 +1,4 @@
-import "./Modal.css";
+import './Modal.css';
 
 import { createContext } from "react";
 import { useContext } from "react"

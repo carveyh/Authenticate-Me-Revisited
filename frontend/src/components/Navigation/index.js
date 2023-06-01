@@ -1,7 +1,9 @@
-import ProfileButton from "./ProfileButton"
+import "./Navigation.css";
 import { useSelector } from "react-redux"
 import { NavLink } from "react-router-dom"
-import "./Navigation.css";
+
+import ProfileButton from "./ProfileButton"
+import LoginFormModal from "../LoginFormModal";
 
 const Navigation = () => {
 	const sessionUser = useSelector(state => state.session?.user)
@@ -11,7 +13,8 @@ const Navigation = () => {
 	if(!sessionUser){
 		sessionLinks = (
 			<>
-			<NavLink className="nav-link" exact activeStyle={{ backgroundColor:"gray" }} to="/login">Login</NavLink>
+			{/* <NavLink className="nav-link" exact activeStyle={{ backgroundColor:"gray" }} to="/login">Login</NavLink> */}
+			<LoginFormModal />
 			<NavLink className="nav-link" exact activeStyle={{ backgroundColor:"teal" }} to="/signup">Signup</NavLink>
 			</>
 		)

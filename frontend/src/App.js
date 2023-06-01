@@ -1,4 +1,4 @@
-import LoginFormPage from "./components/LoginFormPage";
+import LoginFormPage from "./components/LoginFormModal/LoginForm";
 import { Route, Link, NavLink, Switch, useHistory } from "react-router-dom";
 import SignupFormPage from "./components/SignupFormPage";
 import Navigation from "./components/Navigation";
@@ -17,9 +17,9 @@ function App() {
       <br/> */}
 
       <Switch>
-        <Route exact path="/login">
+        {/* <Route exact path="/login">
           <LoginFormPage />
-        </Route>
+        </Route> */}
         <Route exact path="/signup">
           <SignupFormPage />
         </Route>
