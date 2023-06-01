@@ -41,6 +41,17 @@
 	color: red;
 }
 
-.nav-link {
+/* .nav-link {
 	margin-right: 10px;
+} */
+
+.nav-bar-links {
+	display: flex;
+	flex-direction: row;
+}
+.nav-bar-links > li {
+	margin-right: 10px;
+}
+.nav-bar-links > li:hover {
+	color: yellow;
 }

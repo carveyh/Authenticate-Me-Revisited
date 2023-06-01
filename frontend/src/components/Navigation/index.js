@@ -14,8 +14,8 @@ const Navigation = () => {
 		sessionLinks = (
 			<>
 			{/* <NavLink className="nav-link" exact activeStyle={{ backgroundColor:"gray" }} to="/login">Login</NavLink> */}
-			<LoginFormModal />
-			<NavLink className="nav-link" exact activeStyle={{ backgroundColor:"teal" }} to="/signup">Signup</NavLink>
+			<li><LoginFormModal /></li>
+			<li><NavLink className="nav-link" exact activeStyle={{ backgroundColor:"teal" }} to="/signup">Signup</NavLink></li>
 			</>
 		)
 	}
@@ -27,11 +27,11 @@ return (
 			</div>
 			<div className="nav-bar-container">
 				<ProfileButton />
-				<ul>
+				<ul className="nav-bar-links">
 					<li>
 						<NavLink className="nav-link" exact activeStyle={{ backgroundColor:"blue" }} to="/">Home</NavLink>
-						{sessionLinks}	
 					</li>
+					{sessionLinks}	
 				</ul>
 			</div>
 			<div className="nav-bar-placeholder"></div>
